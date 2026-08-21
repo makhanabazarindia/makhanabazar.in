@@ -6,6 +6,10 @@
   <title>Order Now - Makhana Bazar</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background: #f7f7f7;
@@ -13,18 +17,72 @@
       padding: 20px;
     }
 
-    .order-box {
-      max-width: 500px;
-      margin: 30px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    .container {
+      max-width: 520px;
+      margin: auto;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 25px;
+      margin: 10px 0 25px;
+      color: #222;
+    }
+
+    .product {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 12px;
+    }
+
+    .product h2 {
+      margin: 15px 0 8px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .order-btn {
+      display: inline-block;
+      width: 100%;
+      padding: 14px;
+      background: #168a3a;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .order-btn:hover {
+      background: #106d2d;
+    }
+
+    .order-form {
+      display: none;
+      background: white;
+      padding: 25px;
+      margin-top: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.10);
+    }
+
+    .order-form h2 {
+      text-align: center;
+      margin-top: 0;
     }
 
     label {
@@ -33,11 +91,136 @@
       font-weight: bold;
     }
 
-    input, select, textarea {
+    input,
+    textarea {
       width: 100%;
       padding: 12px;
       margin-top: 7px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      box-sizing: border-box;
-      font-size:
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 20px;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Our Products</h1>
+
+  <!-- 250g Product -->
+  <div class="product">
+    <img src="./125D3341-3834-43BA-B6E2-EBF04A4C32E2.png" alt="Makhana 250g">
+    <h2>Makhana - 250g</h2>
+    <div class="price">₹449</div>
+
+    <button class="order-btn" onclick="openForm('250g', '₹449')">
+      Order Now
+    </button>
+  </div>
+
+  <!-- 500g Product -->
+  <div class="product">
+    <img src="./125D3341-3834-43BA-B6E2-EBF04A4C32E2.png" alt="Makhana 500g">
+    <h2>Makhana - 500g</h2>
+    <div class="price">₹899</div>
+
+    <button class="order-btn" onclick="openForm('500g', '₹899')">
+      Order Now
+    </button>
+  </div>
+
+  <!-- Order Form -->
+  <div class="order-form" id="orderForm">
+
+    <h2>Place Your Order</h2>
+
+    <p id="selectedProduct" style="text-align:center;font-weight:bold;"></p>
+
+    <form onsubmit="sendOrder(event)">
+
+      <label>Your Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label>Mobile Number</label>
+      <input type="tel" id="phone" placeholder="Enter mobile number" required>
+
+      <label>Delivery Address</label>
+      <textarea id="address" placeholder="Enter complete delivery address" required></textarea>
+
+      <button type="submit" class="submit-btn">
+        Order on WhatsApp
+      </button>
+
+    </form>
+  </div>
+
+</div>
+
+<script>
+
+  let selectedSize = "";
+  let selectedPrice = "";
+
+  function openForm(size, price) {
+
+    selectedSize = size;
+    selectedPrice = price;
+
+    document.getElementById("selectedProduct").innerHTML =
+      "Selected Product: Makhana " + size + " - " + price;
+
+    const form = document.getElementById("orderForm");
+
+    form.style.display = "block";
+
+    form.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+
+  function sendOrder(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+
+    const message =
+      "Hello Makhana Bazar,%0A%0A" +
+      "I want to place an order.%0A%0A" +
+      "Product: Makhana " + selectedSize + "%0A" +
+      "Price: " + selectedPrice + "%0A" +
+      "Name: " + name + "%0A" +
+      "Mobile: " + phone + "%0A" +
+      "Address: " + address;
+
+    window.location.href =
+      "https://wa.me/918595060412?text=" + message;
+  }
+
+</script>
+
+</body>
+</html>
