@@ -155,11 +155,130 @@
       margin-top: 35px;
     }
 
-    .order-box {
-      text-align: center;
-      margin-top: 25px;
+    .order-box 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Now - Makhana Bazar</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 20px;
     }
 
+    .order-box {
+      max-width: 500px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 7px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    textarea {
+      height: 100px;
+      resize: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      background: #25D366;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="order-box">
+
+    <h1>Place Your Order</h1>
+
+    <label>Product</label>
+    <select id="product">
+      <option value="250g Makhana">250g Makhana</option>
+      <option value="500g Makhana">500g Makhana</option>
+    </select>
+
+    <label>Quantity</label>
+    <input type="number" id="quantity" min="1" value="1">
+
+    <label>Your Name</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label>Mobile Number</label>
+    <input type="tel" id="mobile" placeholder="Enter your mobile number">
+
+    <label>Delivery Address</label>
+    <textarea id="address" placeholder="Enter your full address"></textarea>
+
+    <button onclick="placeOrder()">Place Order on WhatsApp</button>
+
+  </div>
+
+  <script>
+    function placeOrder() {
+
+      var product = document.getElementById("product").value;
+      var quantity = document.getElementById("quantity").value;
+      var name = document.getElementById("name").value;
+      var mobile = document.getElementById("mobile").value;
+      var address = document.getElementById("address").value;
+
+      if (!name || !mobile || !address) {
+        alert("Please fill all details.");
+        return;
+      }
+
+      var message =
+        "Hello Makhana Bazar,%0A%0A" +
+        "I want to place an order.%0A%0A" +
+        "Product: " + product + "%0A" +
+        "Quantity: " + quantity + "%0A" +
+        "Name: " + name + "%0A" +
+        "Mobile: " + mobile + "%0A" +
+        "Address: " + address;
+
+      window.location.href =
+        "https://wa.me/918595060412?text=" + message;
+    }
+  </script>
+
+</body>
+</html>
     .order-box h2 {
       color: #176b35;
       margin-bottom: 12px;
